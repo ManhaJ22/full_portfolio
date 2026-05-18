@@ -2,6 +2,7 @@
 title: "Independent Queens"
 techStack: ["React", "TypeScript", "FastAPI", "Python", "LangChain", "MongoDB", "AWS Lambda", "AWS Cognito", "Docker"]
 demo: "https://youtube.com/watch?v=U_OP-VL0J7Q&feature=youtu.be"
+github: "https://github.com/ManhaJ22/independent_queens.git"
 description: "AI-powered women's empowerment platform combining sentiment analysis journaling, cycle-aware scheduling, and a community skill-exchange marketplace."
 era: "recent"
 award: "🏆 Best Financial Hack — Capital One Prize"
