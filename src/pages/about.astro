@@ -1,0 +1,315 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="About">
+  <div class="about-wrap">
+
+    <div class="breadcrumb"><a href="/">Home</a> / About</div>
+
+    <div class="about-grid">
+
+      <!-- LEFT: Photo in retro window frame -->
+      <div class="photo-col">
+        <div class="retro-window">
+          <div class="window-bar">
+            <div class="window-controls">
+              <span class="wc red"></span>
+              <span class="wc yellow"></span>
+              <span class="wc green"></span>
+            </div>
+            <span class="window-title">manha.png</span>
+          </div>
+          <div class="window-body">
+            <img src="/manha.png" alt="Manha Jawahar" class="profile-img" />
+          </div>
+        </div>
+
+        <div class="status-window">
+          <div class="window-bar">
+            <div class="window-controls">
+              <span class="wc red"></span>
+              <span class="wc yellow"></span>
+              <span class="wc green"></span>
+            </div>
+            <span class="window-title">status.exe</span>
+          </div>
+          <div class="window-body stats-body">
+            <div class="stat-row">
+              <span class="stat-label">// location</span>
+              <span class="stat-val">Redmond, WA</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">// education</span>
+              <span class="stat-val">VT CS '25</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">// gpa</span>
+              <span class="stat-val">3.7 / 4.0</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">// hackathons</span>
+              <span class="stat-val accent">2× winner</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">// cats</span>
+              <span class="stat-val">2 (one senior)</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">// status</span>
+              <span class="stat-val blink accent">● open to work</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Story -->
+      <div class="story-col">
+        <div class="retro-window story-window">
+          <div class="window-bar">
+            <div class="window-controls">
+              <span class="wc red"></span>
+              <span class="wc yellow"></span>
+              <span class="wc green"></span>
+            </div>
+            <span class="window-title">readme.md</span>
+          </div>
+          <div class="window-body story-body">
+            <h1 class="story-name">Manha Jawahar</h1>
+            <p class="story-tagline">AI Engineer · Security · Full-Stack · Virginia Tech CS '25</p>
+            <p class="story-tagline secondary">Also: classically trained musician · 2× hackathon winner · cat mom</p>
+
+            <div class="divider"></div>
+
+            <p class="story-text">
+              I specialize in building production AI systems — RAG pipelines, agentic workflows,
+              LLM evaluation infrastructure, and secure identity systems. My background sits at
+              the intersection of AI engineering and security, which I chose deliberately:
+              as AI becomes infrastructure, securing it becomes non-negotiable.
+            </p>
+
+            <p class="story-text">
+              Before I wrote production code, I performed at Benaroya Hall in Seattle.
+              I was classically trained and almost minored in music theory — until I realized
+              cybersecurity was going to matter a lot once AI went mainstream.
+              That was sophomore year of high school. The prediction held.
+            </p>
+
+            <p class="story-text">
+              I built my first Java project in middle school, did AI safety research at Virginia Tech,
+              won Best Auth0 Implementation and Best Financial Hack at hackathons,
+              and interned at a startup in Redmond building agentic AI workflows.
+              I work best when the problem is hard and the stakes are real.
+            </p>
+
+            <div class="divider"></div>
+
+            <h2 class="section-label">// core stack</h2>
+            <div class="tag-grid">
+              {["Python", "Java (5+ yrs)", "TypeScript", "React", "FastAPI",
+                "LangChain", "RAG", "AWS", "Docker", "Kubernetes",
+                "OAuth2 / OIDC", "PyTorch"].map(t => (
+                <span class="tag">{t}</span>
+              ))}
+            </div>
+
+            <div class="divider"></div>
+
+            <h2 class="section-label">// currently</h2>
+            <p class="story-text">
+              Actively interviewing for AI engineering and security engineering roles.
+              Building an OAuth2/IAM flow visualizer and a music mood analyzer
+              using the Spotify API. Also: prepping for Apple and Google interviews,
+              and waiting to hear back from a VT alum at Spotify.
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="contact-row">
+              <a href="mailto:manhaj22@vt.edu" class="contact-btn">manhaj22@vt.edu</a>
+              <a href="https://linkedin.com/in/manhajawahar" target="_blank" class="contact-btn">LinkedIn</a>
+              <a href="https://github.com/Manhaj22" target="_blank" class="contact-btn">GitHub</a>
+              <a href="/projects/recent" class="contact-btn accent-btn">View Projects →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .about-wrap { padding: 2rem 0 4rem; }
+
+  .breadcrumb {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  /* Retro window */
+  .retro-window {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .window-bar {
+    background: #1a1a1a;
+    border-bottom: 1px solid var(--border);
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .window-controls { display: flex; gap: 5px; }
+
+  .wc {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .wc.red { background: #ff5f57; }
+  .wc.yellow { background: #febc2e; }
+  .wc.green { background: #28c840; }
+
+  .window-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    flex: 1;
+    text-align: center;
+  }
+
+  .window-body { padding: 0; }
+
+  .profile-img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.9);
+  }
+
+  /* Status window */
+  .status-window { margin-top: 1rem; }
+
+  .stats-body { padding: 1rem; }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+  }
+
+  .stat-row:last-child { border-bottom: none; }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+
+  .stat-val {
+    font-family: var(--font-mono);
+    color: var(--text);
+    font-size: 0.75rem;
+  }
+
+  .stat-val.accent { color: var(--accent); }
+
+  .blink { animation: blink 1.2s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Story window */
+  .story-window { height: 100%; }
+  .story-body { padding: 2rem; }
+
+  .story-name {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.5rem;
+  }
+
+  .story-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .story-tagline.secondary { color: var(--muted); }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem 0;
+  }
+
+  .story-text {
+    font-size: 0.925rem;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+  }
+
+  .tag-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--muted);
+  }
+
+  .contact-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+  .contact-btn {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    text-decoration: none;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .contact-btn:hover { border-color: var(--text); color: var(--text); }
+
+  .accent-btn {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .accent-btn:hover { background: var(--accent); color: #000; }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+</style>
