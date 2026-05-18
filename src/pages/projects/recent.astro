@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.filter(p => p.data.era === 'recent');
+---
+<Layout title="Recent Projects">
+  <div class="page-header">
+    <div class="breadcrumb"><a href="/">Home</a> / Recent</div>
+    <h1>Recent Projects</h1>
+    <p class="page-sub">Production systems, hackathon wins, and research work — 2024–2025.</p>
+    <a href="/projects/archive" class="archive-link">View Older Work →</a>
+  </div>
+
+  <div class="projects-grid">
+    {projects.map((project) => (
+      <article class="project-card">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="year">{project.data.year}</span>
+            {project.data.award && (
+              <span class="award">{project.data.award}</span>
+            )}
+          </div>
+          <h2 class="card-title">{project.data.title}</h2>
+          <p class="card-desc">{project.data.description}</p>
+        </div>
+        <div class="card-bottom">
+          <div class="tech-tags">
+            {project.data.techStack.slice(0, 5).map(tech => (
+              <span class="tech">{tech}</span>
+            ))}
+            {project.data.techStack.length > 5 && (
+              <span class="tech muted">+{project.data.techStack.length - 5}</span>
+            )}
+          </div>
+          <div class="card-links">
+            {project.data.demo && (
+              <a href={project.data.demo} target="_blank" class="link-btn primary">▶ Demo</a>
+            )}
+            {project.data.github && (
+              <a href={project.data.github} target="_blank" class="link-btn">GitHub</a>
+            )}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    padding: 3rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .breadcrumb {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+  }
+
+  .page-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .archive-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--bg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    transition: background 0.2s;
+  }
+
+  .project-card:hover { background: var(--surface); }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .year {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .award {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    background: rgba(200, 245, 66, 0.1);
+    color: var(--accent);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    border: 1px solid rgba(200, 245, 66, 0.3);
+  }
+
+  .card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tech {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--muted);
+  }
+
+  .tech.muted { opacity: 0.5; }
+
+  .card-links { display: flex; gap: 0.75rem; }
+
+  .link-btn {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    text-decoration: none;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .link-btn:hover { border-color: var(--text); color: var(--text); }
+  .link-btn.primary { border-color: var(--accent); color: var(--accent); }
+  .link-btn.primary:hover { background: var(--accent); color: #000; }
+
+  @media (max-width: 640px) {
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>

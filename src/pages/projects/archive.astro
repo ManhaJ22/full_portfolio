@@ -1,0 +1,181 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.filter(p => p.data.era === 'archive');
+---
+<Layout title="Archive">
+  <div class="page-header">
+    <div class="breadcrumb"><a href="/">Home</a> / <a href="/projects/recent">Recent</a> / Archive</div>
+    <h1>Archive</h1>
+    <p class="page-sub">Older work — where the curiosity started.</p>
+    <a href="/projects/recent" class="back-link">← Recent Projects</a>
+  </div>
+
+  <div class="archive-note">
+    <span class="note-icon">📁</span>
+    <p>These are earlier projects that reflect the beginning of the journey — before production systems and hackathon wins. Keeping them here because every senior engineer was once a beginner.</p>
+  </div>
+
+  <div class="archive-list">
+    {projects.map((project) => (
+      <article class="archive-item">
+        <div class="archive-left">
+          <span class="year">{project.data.year}</span>
+          <h2 class="item-title">{project.data.title}</h2>
+          <p class="item-desc">{project.data.description}</p>
+        </div>
+        <div class="archive-right">
+          <div class="tech-tags">
+            {project.data.techStack.map(tech => (
+              <span class="tech">{tech}</span>
+            ))}
+          </div>
+          {project.data.github && (
+            <a href={project.data.github} target="_blank" class="link-btn">GitHub</a>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    padding: 3rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .breadcrumb {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+  }
+
+  .page-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .archive-note {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 1.25rem 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 3rem;
+  }
+
+  .note-icon { font-size: 1.25rem; flex-shrink: 0; }
+
+  .archive-note p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .archive-item {
+    background: var(--bg);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    transition: background 0.2s;
+  }
+
+  .archive-item:hover { background: var(--surface); }
+
+  .archive-left { flex: 1; }
+
+  .year {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .item-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .item-desc {
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  .archive-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+
+  .tech {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--muted);
+  }
+
+  .link-btn {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    text-decoration: none;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .link-btn:hover { border-color: var(--text); color: var(--text); }
+
+  @media (max-width: 640px) {
+    .archive-item { flex-direction: column; }
+    .archive-right { align-items: flex-start; }
+    .tech-tags { justify-content: flex-start; }
+  }
+</style>
