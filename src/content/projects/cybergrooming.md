@@ -10,7 +10,6 @@ year: "2024-2025"
 
 Production AI safety research system built at Virginia Tech featuring:
 
-- Real-time threat classification using RAG pipeline with LangChain
-- 6-stage grooming taxonomy with context boundary enforcement
-- FastAPI backend with strict data isolation and zero-trust design
-- React audit dashboard for researcher review and model evaluation
+- AI-powered child safety system using a custom RAG architecture 
+- Built from scratch using OpenAI embeddings and cosine similarity
+- Detects online grooming patterns in real time, classifying conversations across a 6-stage threat taxonomy.
